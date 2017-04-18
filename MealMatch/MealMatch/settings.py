@@ -44,6 +44,10 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'recipes',
+    'account_functions',
+    'rest_framework',
+    'rest_framework_mongoengine',
+
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',

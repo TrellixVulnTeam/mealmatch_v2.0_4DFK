@@ -5,9 +5,18 @@
 
 var mapfunction = function() {
     var value = {};
+    var array = [];
+
     for (var index = 0; index < this.ingredients_list.length; index++){
         var key = this.ingredients_list[index];
-        value[this._id] = this.title;
+        //value[this._id] = this.title;
+
+
+        value[this.title] = this._id
+        // if(array.indexOf(value) == -1) {
+        //   array.push(value)
+        //   }
+
         emit(key, value)
 
 
@@ -26,8 +35,22 @@ var reducefunction = function (ing, title) {
 
 }
 
-//var finalizefunc= function (key, result ){
- //   return result.title
+var finalizefunc= function (key, result ){
+    var array = []
+    //Look up scope function
+    for (var key in result){
+
+
+        array.push({"_id" : result[key] })
+
+    }
+
+
+
+    return array
+
+}
+
 
 //}
     //var arr = title.toString()
@@ -39,10 +62,19 @@ var reducefunction = function (ing, title) {
 db.recipe.mapReduce(
     mapfunction,
     reducefunction,
-    { out: "mapped"}
-    //finalize: finalizefunc}
+    { out: "mapped",
+    finalize: finalizefunc}
 
 
+)
+
+db.mapped.aggregate(
+    [
+        { "$addFields": {
+            "title": { "$concat": ["$_id"] }
+        }},
+        { "$out": "mapped" }
+    ]
 )
 
 

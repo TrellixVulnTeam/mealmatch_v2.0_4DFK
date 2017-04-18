@@ -166,11 +166,15 @@ function extractRecipe(recipe){
        console.log(recipe.directions)
        console.log(recipe.author)
        console.log(recipe.tags)
-
-
-
-
-
-
 }
 
+/*$(document).ready(function(){
+        /*$("#recipe_box").click(function(){
+
+            ///var val = $(this).children();
+            var val = $(this).find(":input").triggerHandler("click")
+            window.alert(val)
+            $(".single_recipe").submit(val)
+
+        });
+    });*/

@@ -43,22 +43,22 @@
                     <div class="row">
 
 
-                        {%for recipe in recipe_array%}
+                        {%for id, recipe in recipe_array.items%}
 
 
-
-                            <form class = "single_recipe" action="/recipes/presenterarecept" method="POST" >
+                            <form class = "single_recipe" action="/recipes/presenterarecept/{{id}}" method="GET" >
                                 {% csrf_token %}
 
-                            <div class="col-sm-3" id="recipe_box" data-id ={{recipe.id}}>
 
-                                <input type="image" name="ind_recipe" class= "recipe_image" src={{recipe.image}} style="width:100%; height:auto;" value='{{recipe.to_json}}'>
+                            <div class="col-sm-3" id="recipe_box" data-id ={{recipe.id}} >
 
+                                <input type="image" name="ind_recipe" class= "recipe_image" value = {{recipe}} src={{recipe.image }} style="width:100%; height:auto;" >
 
                                 <h4>{{recipe.title}}</h4>
 
 
-                                <li class="list-item__meta-item"><i class="list-item__meta-icon fa fa-tags" aria-hidden="true"></i> {{recipe.ingredients_list|length}} Ingredients</li>
+
+                                <li class="list-item__meta-item"><i class="list-item__meta-icon fa fa-tags" aria-hidden="true"></i> You have {{recipe.frequency}} out of {{recipe.ing_count}} Ingredients</li>
 
 
                             </div>
